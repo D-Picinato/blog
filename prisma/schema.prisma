@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String @unique
+  password String
+}
+
+model Post {
+  id       String    @id @default(uuid())
+  name     String
+  contents Content[]
+}
+
+enum ContentPostType {
+  TEXT
+  IMAGE
+}
+
+model Content {
+  id      String          @id @default(uuid())
+  order   Int
+  type    ContentPostType
+  content String?
+  image   Bytes?
+  post    Post            @relation(fields: [postId], references: [id])
+  postId  String
+
+  @@unique([order, postId])
+}
