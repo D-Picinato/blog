@@ -14,9 +14,12 @@ model User {
 }
 
 model Post {
-  id       String    @id @default(uuid())
-  name     String
-  contents Content[]
+  id        String    @id @default(uuid())
+  name      String
+  contents  Content[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
 }
 
 enum ContentPostType {
