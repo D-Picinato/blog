@@ -8,15 +8,20 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String @unique
-  password String
+  id        String   @id @default(uuid())
+  name      String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Post {
-  id       String    @id @default(uuid())
-  name     String
-  contents Content[]
+  id        String    @id @default(uuid())
+  name      String
+  contents  Content[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 enum ContentPostType {
@@ -25,13 +30,16 @@ enum ContentPostType {
 }
 
 model Content {
-  id      String          @id @default(uuid())
-  order   Int
-  type    ContentPostType
-  content String?
-  image   Bytes?
-  post    Post            @relation(fields: [postId], references: [id])
-  postId  String
+  id        String          @id @default(uuid())
+  order     Int
+  type      ContentPostType
+  content   String?
+  image     Bytes?
+  post      Post            @relation(fields: [postId], references: [id])
+  postId    String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
 
   @@unique([order, postId])
 }
