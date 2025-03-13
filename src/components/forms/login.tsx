@@ -14,9 +14,11 @@ import { useCustomModal } from '@/stores/use-custom-modal';
 import toast from 'react-hot-toast';
 import Toast from '../ui/toast';
 import requestErrorHandler from '@/utils/functions/request-error-handler';
+import { useState } from 'react';
 
 export default function LoginModal() {
   const { removeModal } = useCustomModal();
+  const [loading, setLoading] = useState<boolean>();
 
   const {
     register,
@@ -26,17 +28,20 @@ export default function LoginModal() {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit = (data: LoginFormSchemaType) =>
+  const onSubmit = (data: LoginFormSchemaType) => {
+    setLoading(true);
     api.user
       .login(data)
       .then((response) => {
-        if (!response.success) requestErrorHandler(response);
+        if (!response.success) return requestErrorHandler(response);
 
         toast.custom(<Toast variant="success">{response.message}</Toast>);
 
         removeModal();
       })
-      .catch(() => requestErrorHandler);
+      .catch(() => requestErrorHandler())
+      .finally(() => setLoading(false));
+  };
 
   return (
     <form
@@ -74,7 +79,11 @@ export default function LoginModal() {
         <Button variant="clean" type="button" onClick={removeModal}>
           Cancelar
         </Button>
-        <Button variant="solid" icon={<HiOutlineArrowRightEndOnRectangle />}>
+        <Button
+          variant="solid"
+          loading={loading}
+          icon={<HiOutlineArrowRightEndOnRectangle />}
+        >
           Entrar
         </Button>
       </div>
