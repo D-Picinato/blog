@@ -1,7 +1,8 @@
 import '@/styles/globals.css';
 
-import CustomModal from '@/components/custom-modal';
 import type { Metadata } from 'next';
+import CustomModal from '@/components/custom-modal';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Blog - PW III',
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="flex justify-center">
         {children}
         <CustomModal />
+        <Toaster position="top-center" />
       </body>
     </html>
   );

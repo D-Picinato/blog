@@ -1,4 +1,4 @@
-import ResponseFormat from '@/classes/response-format';
+import ResponseFormat from '@/utils/classes/response-format';
 import jwt from 'jsonwebtoken';
 
 /** Decodifica o JWT */

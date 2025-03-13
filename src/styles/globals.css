@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 
 @layer base {
+  * {
+    font: inherit;
+  }
+
   html {
     font-family: Arial, Helvetica, sans-serif;
-    @apply bg-gray-950 text-gray-50;
+    @apply bg-gray-950 text-gray-100;
   }
 
   @media (max-width: 512px) {
@@ -47,5 +51,21 @@
 
   h6 {
     @apply text-xs;
+  }
+}
+
+@layer utilities {
+  .loadingIcon {
+    animation: loading 0.3s ease-in infinite;
+  }
+}
+
+@keyframes loading {
+  from {
+    rotate: 0;
+  }
+
+  to {
+    rotate: 360deg;
   }
 }

@@ -1,4 +1,4 @@
-import ResponseFormat from '@/classes/response-format';
+import ResponseFormat from '@/utils/classes/response-format';
 import catchErrorHandler from '@/utils/functions/catch-error-handler';
 import { cookies } from 'next/headers';
 import verifyJWT from '@/utils/functions/verify-jwt';
@@ -21,6 +21,6 @@ export async function GET() {
 
     return new ResponseFormat(200, 'Sessão válida!', decoded).res();
   } catch (error) {
-    return catchErrorHandler(error, { messageP2025: '' }).res();
+    return catchErrorHandler(error).res();
   }
 }

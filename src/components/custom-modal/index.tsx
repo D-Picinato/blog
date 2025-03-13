@@ -32,7 +32,7 @@ export default function CustomModal() {
         },
       }}
     >
-      <div className="flex p-8 bg-gray-900 rounded-md border border-gray-800">
+      <div className="flex p-8 bg-gray-900 rounded-lg border border-gray-800">
         {content}
       </div>
     </Modal>

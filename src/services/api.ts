@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ResponseFormat from '@/classes/response-format';
+import ResponseFormat from '@/utils/classes/response-format';
 import { CreateUserApiSchemaType } from '@/schemas/api/user/create';
 import { User } from '@prisma/client';
 import { LoginApiSchemaType } from '@/schemas/api/user/login';
@@ -37,16 +37,14 @@ function request<Params = undefined, Response = undefined>(
 /** Client tipado e estruturado das requisições */
 export const api = {
   user: {
-    create: () =>
-      request<CreateUserApiSchemaType, Omit<User, 'password'>>(
-        'post',
-        '/user/create'
-      ),
-    login: () =>
-      request<LoginApiSchemaType, Omit<User, 'password'>>(
-        'post',
-        '/user/login'
-      ),
-    me: () => request<undefined, Omit<User, 'password'>>('get', '/user/me'),
+    create: request<CreateUserApiSchemaType, Omit<User, 'password'>>(
+      'post',
+      '/user/create'
+    ),
+    login: request<LoginApiSchemaType, Omit<User, 'password'>>(
+      'post',
+      '/user/login'
+    ),
+    me: request<undefined, Omit<User, 'password'>>('get', '/user/me'),
   },
 };

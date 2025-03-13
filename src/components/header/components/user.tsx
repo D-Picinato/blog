@@ -9,8 +9,8 @@ import {
   HiOutlineUserPlus,
 } from 'react-icons/hi2';
 import { useCustomModal } from '@/stores/use-custom-modal';
-import LoginModal from '@/modals/login';
-import RegisterModal from '@/modals/register';
+import LoginModal from '@/components/forms/login';
+import RegisterModal from '@/components/forms/register';
 
 export default function User() {
   const { name, session } = useUser();
@@ -33,10 +33,10 @@ export default function User() {
   return (
     <div className="flex justify-end relative" ref={menuRef}>
       <button
-        className="flex items-center gap-2 rounded-md hover:bg-gray-800 p-2 transition-all duration-100"
+        className="flex items-center gap-2 rounded-lg hover:bg-gray-800 p-2 transition-all duration-100"
         onClick={() => setActive((v) => !v)}
       >
-        <div className="w-10 h-10 rounded-md bg-gray-600 text-2xl flex items-center justify-center text-gray-300">
+        <div className="w-10 h-10 rounded-lg bg-gray-600 text-2xl flex items-center justify-center text-gray-300">
           {session ? (
             name
               .split(' ')
@@ -53,7 +53,7 @@ export default function User() {
 
       <div
         className={clsx(
-          'bg-gray-900 border border-gray-800 absolute top-[calc(100%+8px)] p-2 rounded-md transition-all duration-100 w-max',
+          'bg-gray-900 border border-gray-800 absolute top-[calc(100%+8px)] p-2 rounded-lg transition-all duration-100 w-max',
           active
             ? 'visible opacity-100 scale-y-100'
             : 'invisible opacity-0 scale-y-0'
@@ -65,14 +65,14 @@ export default function User() {
           ) : (
             <>
               <button
-                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-md"
+                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-lg"
                 onClick={() => createModal(<LoginModal />)}
               >
                 <span>Entrar</span>
                 <HiOutlineArrowRightEndOnRectangle />
               </button>
               <button
-                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-md"
+                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-lg"
                 onClick={() => createModal(<RegisterModal />)}
               >
                 <span>Cadastrar-se</span>

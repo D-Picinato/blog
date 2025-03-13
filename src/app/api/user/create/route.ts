@@ -1,5 +1,5 @@
 import { prisma } from '@/services/prisma';
-import ResponseFormat from '@/classes/response-format';
+import ResponseFormat from '@/utils/classes/response-format';
 import {
   createUserApiSchema,
   CreateUserApiSchemaType,

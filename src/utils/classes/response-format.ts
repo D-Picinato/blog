@@ -13,6 +13,7 @@ export default class ResponseFormat<T = undefined> {
     this.data = data;
   }
 
+  /** Retorna uma resposta estruturada do Next */
   res = (nextResponse?: ResponseInit) =>
     NextResponse.json(this, { status: this.status, ...nextResponse });
 }
