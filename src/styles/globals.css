@@ -58,6 +58,14 @@
   .loadingIcon {
     animation: loading 0.3s ease-in infinite;
   }
+
+  .hover\:bg-transparent-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .hover\:bg-transparent-dark:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 @keyframes loading {

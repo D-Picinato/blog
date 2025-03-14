@@ -1,22 +1,25 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useUser } from '@/stores/use-user';
+import { useUser } from '@/hooks/use-user';
 import clsx from 'clsx';
 import {
+  HiOutlineArrowLeftStartOnRectangle,
   HiOutlineArrowRightEndOnRectangle,
   HiOutlineUser,
   HiOutlineUserPlus,
 } from 'react-icons/hi2';
-import { useCustomModal } from '@/stores/use-custom-modal';
+import { useCustomModalStore } from '@/stores/use-custom-modal-store';
 import LoginModal from '@/components/forms/login';
 import RegisterModal from '@/components/forms/register';
+import Button from '@/components/ui/button';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 export default function User() {
-  const { name, session } = useUser();
+  const { loading, user, logout } = useUser();
   const [active, setActive] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { createModal } = useCustomModal();
+  const { createModal } = useCustomModalStore();
 
   useEffect(() => {
     const handleScreenClick = (e: MouseEvent) => {
@@ -33,12 +36,14 @@ export default function User() {
   return (
     <div className="flex justify-end relative" ref={menuRef}>
       <button
-        className="flex items-center gap-2 rounded-lg hover:bg-gray-800 p-2 transition-all duration-100"
+        className="flex items-center gap-2 rounded-lg hover:bg-transparent-light p-2 transition-all duration-100"
         onClick={() => setActive((v) => !v)}
       >
-        <div className="w-10 h-10 rounded-lg bg-gray-600 text-2xl flex items-center justify-center text-gray-300">
-          {session ? (
-            name
+        <div className="w-10 h-10 rounded-lg bg-gray-600 text-xl flex items-center justify-center text-gray-300">
+          {loading ? (
+            <AiOutlineLoading className="loadingIcon" />
+          ) : user ? (
+            user.name
               .split(' ')
               .slice(0, 2)
               .map((name) => name[0].toUpperCase())
@@ -48,7 +53,9 @@ export default function User() {
           )}
         </div>
         <div className="border border-gray-800 h-10"></div>
-        <p className="p-2">{session ? name : 'Entrar'}</p>
+        <p className="p-2">
+          {loading ? 'Carregando...' : user ? user.name : 'Entrar'}
+        </p>
       </button>
 
       <div
@@ -60,8 +67,11 @@ export default function User() {
         )}
       >
         <div className="flex flex-col">
-          {session ? (
-            <></>
+          {user ? (
+            <Button variant="clean" onClick={logout}>
+              <span>Sair</span>
+              <HiOutlineArrowLeftStartOnRectangle />
+            </Button>
           ) : (
             <>
               <button

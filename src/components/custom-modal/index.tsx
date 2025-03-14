@@ -1,11 +1,11 @@
 'use client';
-import { useCustomModal } from '@/stores/use-custom-modal';
+import { useCustomModalStore } from '@/stores/use-custom-modal-store';
 import Modal from 'react-modal';
 
 Modal.setAppElement('body');
 
 export default function CustomModal() {
-  const { content, removeModal } = useCustomModal();
+  const { content, removeModal } = useCustomModalStore();
 
   return (
     <Modal

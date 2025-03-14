@@ -7,7 +7,7 @@ export const registerFormSchema = z.object({
     .max(25, { message: 'Nome deve ter no máximo 25 caracteres' }),
   password: z
     .string({ message: 'Senha é obrigatória' })
-    .min(6, { message: 'Senha deve possuir no mínimo 6 caracteres' })
+    .min(8, { message: 'Senha deve possuir no mínimo 8 caracteres' })
     .max(25, { message: 'Senha deve possuir no máximo 25 caracteres' })
     .regex(/[0-9]/, {
       message: 'A senha deve possuir pelo menos um número!',

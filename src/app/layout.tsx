@@ -5,7 +5,7 @@ import CustomModal from '@/components/custom-modal';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
-  title: 'Blog - PW III',
+  title: 'Blog PW',
   description:
     'Blog simples para as aulas de PW III do curso AMS (Articulação da Formação Médio Superior) - Desenvolvimento de Sistemas',
 };

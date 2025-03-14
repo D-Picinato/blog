@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { JSX, useEffect, useState } from 'react';
+import { HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
 
 /** Props para o componente Input */
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -29,10 +30,12 @@ export default function Input({
   onBlur,
   onChange,
   className,
+  type = 'text',
   ...props
 }: InputProps) {
   const [active, setActive] = useState<boolean>(!!defaultValue);
   const [hasValue, setHasValue] = useState<boolean>(!!defaultValue);
+  const [inputType, setInputType] = useState<typeof type>(type);
 
   return (
     <div
@@ -57,7 +60,7 @@ export default function Input({
       </label>
       <input
         id={id}
-        type="text"
+        type={inputType}
         placeholder={active ? placeholder : ''}
         defaultValue={defaultValue}
         {...props}
@@ -78,10 +81,22 @@ export default function Input({
           className
         )}
       />
-      {icon && (
+      {icon ? (
         <label htmlFor={id} className="flex items-center px-4 text-gray-100">
           {icon}
         </label>
+      ) : (
+        type == 'password' && (
+          <button
+            className="flex items-center px-4 text-gray-100 !cursor-pointer **:!cursor-pointer"
+            type="button"
+            onClick={() =>
+              setInputType(inputType == 'password' ? 'text' : 'password')
+            }
+          >
+            {inputType == 'password' ? <HiOutlineEyeSlash /> : <HiOutlineEye />}
+          </button>
+        )
       )}
       <div className="absolute bottom-0 w-full h-px flex bg-gray-500">
         <div
@@ -93,11 +108,15 @@ export default function Input({
         ></div>
       </div>
       {errorMessage ? (
-        <p className="absolute -bottom-5 text-xs text-red-500">
+        <label htmlFor={id} className="absolute -bottom-5 text-xs text-red-500">
           {errorMessage}
-        </p>
+        </label>
       ) : (
-        message && <p className="absolute -bottom-5 text-xs">{errorMessage}</p>
+        message && (
+          <label htmlFor={id} className="absolute -bottom-5 text-xs">
+            {message}
+          </label>
+        )
       )}
     </div>
   );

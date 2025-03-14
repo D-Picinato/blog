@@ -5,9 +5,10 @@ import { AiOutlineLoading } from 'react-icons/ai';
 import clsx from 'clsx';
 
 const variants = {
-  solid: 'bg-gray-200 text-gray-900',
-  border: 'text-gray-100 border border-solid border-gray-100',
-  clean: 'text-gray-100',
+  solid: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+  border:
+    'text-gray-100 border border-solid border-gray-100 hover:bg-transparent-light',
+  clean: 'text-gray-100 hover:bg-transparent-light',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,7 +40,7 @@ export default function Button({
       {...props}
       onClick={(e) => !isDisable && onClick && onClick(e)}
       className={clsx(
-        'border-none bg-none **:cursor-pointer px-4 h-10 rounded-lg font-semibold flex items-center justify-center gap-2',
+        'border-none bg-none **:cursor-pointer px-4 h-10 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors duration-100',
         variants[variant],
         !!!children && 'w-10 p-0',
         isDisable && 'brightness-50 cursor-not-allowed',
