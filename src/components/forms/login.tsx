@@ -26,10 +26,7 @@ export default function LoginModal() {
 
   return (
     <form
-      onSubmit={handleSubmit((v) => {
-        login(v);
-        removeModal();
-      })}
+      onSubmit={handleSubmit((v) => login(v).then(removeModal))}
       className="flex flex-col gap-8"
       autoComplete="off"
     >

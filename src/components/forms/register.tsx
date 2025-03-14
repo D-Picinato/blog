@@ -43,10 +43,7 @@ export default function RegisterModal() {
 
   return (
     <form
-      onSubmit={handleSubmit((v) => {
-        registerFn(v);
-        removeModal();
-      })}
+      onSubmit={handleSubmit((v) => registerFn(v).then(removeModal))}
       className="flex flex-col gap-8"
       autoComplete="off"
     >

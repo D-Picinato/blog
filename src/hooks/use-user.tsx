@@ -28,46 +28,46 @@ export function useUser() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** Faz login */
-  const login = (data: LoginFormSchemaType) => {
+  const login = async (data: LoginFormSchemaType) => {
     setLoading(true);
-    api.user
-      .login(data)
-      .then((response) => {
-        if (!response.success || !response.data)
-          return requestErrorHandler(response);
-        toast.custom(<Toast variant="success">{response.message}</Toast>);
-        store.setUser(response.data);
-      })
-      .catch(() => requestErrorHandler())
-      .finally(() => setLoading(false));
+    try {
+      const response = await api.user.login(data);
+      if (!response.success || !response.data)
+        return requestErrorHandler(response);
+      toast.custom(<Toast variant="success">{response.message}</Toast>);
+      store.setUser(response.data);
+    } catch {
+      requestErrorHandler();
+    }
+    setLoading(false);
   };
 
   /** Cadastra usuário */
-  const register = (data: RegisterFormSchemaType) => {
+  const register = async (data: RegisterFormSchemaType) => {
     setLoading(true);
-    api.user
-      .create(data)
-      .then((response) => {
-        if (!response.success || !response.data)
-          return requestErrorHandler(response);
-        toast.custom(<Toast variant="success">{response.message}</Toast>);
-        store.setUser(response.data);
-      })
-      .catch(() => requestErrorHandler())
-      .finally(() => setLoading(false));
+    try {
+      const response = await api.user.create(data);
+      if (!response.success || !response.data)
+        return requestErrorHandler(response);
+      toast.custom(<Toast variant="success">{response.message}</Toast>);
+      store.setUser(response.data);
+    } catch {
+      requestErrorHandler();
+    }
+    setLoading(false);
   };
 
   /** Faz logout */
-  const logout = () => {
+  const logout = async () => {
     setLoading(true);
-    api.user
-      .logout()
-      .then((response) => {
-        if (!response.success) return requestErrorHandler(response);
-        store.removeUser();
-      })
-      .catch(() => requestErrorHandler())
-      .finally(() => setLoading(false));
+    try {
+      const response = await api.user.logout();
+      if (!response.success) return requestErrorHandler(response);
+      store.removeUser();
+    } catch {
+      requestErrorHandler();
+    }
+    setLoading(false);
   };
 
   return { loading, login, register, logout, ...store };
