@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useState } from 'react';
 import { HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
 
 /** Props para o componente Input */

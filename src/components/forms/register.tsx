@@ -39,7 +39,7 @@ export default function RegisterModal() {
         message: 'A senha está diferente',
       });
     clearErrors('passwordConfirmation');
-  }, [passwordConfirmation]);
+  }, [passwordConfirmation]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form

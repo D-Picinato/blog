@@ -25,7 +25,7 @@ export function useUser() {
         .catch(() => requestErrorHandler())
         .finally(() => setLoading(false));
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** Faz login */
   const login = (data: LoginFormSchemaType) => {
