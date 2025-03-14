@@ -3,23 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { useUser } from '@/hooks/use-user';
 import clsx from 'clsx';
-import {
-  HiOutlineArrowLeftStartOnRectangle,
-  HiOutlineArrowRightEndOnRectangle,
-  HiOutlineUser,
-  HiOutlineUserPlus,
-} from 'react-icons/hi2';
+import { HiOutlineUser } from 'react-icons/hi2';
 import { useCustomModalStore } from '@/stores/use-custom-modal-store';
-import LoginModal from '@/components/forms/login';
-import RegisterModal from '@/components/forms/register';
-import Button from '@/components/ui/button';
 import { AiOutlineLoading } from 'react-icons/ai';
+import UserMenu from './user-menu';
 
 export default function User() {
-  const { loading, user, logout } = useUser();
+  const { loading, user } = useUser();
   const [active, setActive] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { createModal } = useCustomModalStore();
 
   useEffect(() => {
     const handleScreenClick = (e: MouseEvent) => {
@@ -66,31 +58,7 @@ export default function User() {
             : 'invisible opacity-0 scale-y-0'
         )}
       >
-        <div className="flex flex-col">
-          {user ? (
-            <Button variant="clean" onClick={logout}>
-              <span>Sair</span>
-              <HiOutlineArrowLeftStartOnRectangle />
-            </Button>
-          ) : (
-            <>
-              <button
-                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-lg"
-                onClick={() => createModal(<LoginModal />)}
-              >
-                <span>Entrar</span>
-                <HiOutlineArrowRightEndOnRectangle />
-              </button>
-              <button
-                className="flex justify-center items-center gap-2 p-2 px-4 hover:bg-gray-800 rounded-lg"
-                onClick={() => createModal(<RegisterModal />)}
-              >
-                <span>Cadastrar-se</span>
-                <HiOutlineUserPlus />
-              </button>
-            </>
-          )}
-        </div>
+        <UserMenu />
       </div>
     </div>
   );

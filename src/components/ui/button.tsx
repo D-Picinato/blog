@@ -9,6 +9,7 @@ const variants = {
   border:
     'text-gray-100 border border-solid border-gray-100 hover:bg-transparent-light',
   clean: 'text-gray-100 hover:bg-transparent-light',
+  danger: 'text-red-600 bg-transparent-red hover:bg-transparent-red',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
