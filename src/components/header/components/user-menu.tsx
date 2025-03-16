@@ -5,17 +5,19 @@ import RegisterModal from '@/components/forms/register';
 import Button from '@/components/ui/button';
 import { useUser } from '@/hooks/use-user';
 import { useCustomModalStore } from '@/stores/use-custom-modal-store';
+import { useRouter } from 'next/navigation';
 import {
   HiOutlineArrowLeftStartOnRectangle,
   HiOutlineArrowRightEndOnRectangle,
-  HiOutlineCog6Tooth,
   HiOutlinePlus,
+  HiOutlineUser,
   HiOutlineUserPlus,
 } from 'react-icons/hi2';
 
 export default function UserMenu() {
   const { user, logout } = useUser();
   const { createModal } = useCustomModalStore();
+  const { push } = useRouter();
 
   return (
     <div className="flex flex-col gap-1">
@@ -25,11 +27,11 @@ export default function UserMenu() {
             <span>Post</span>
             <HiOutlinePlus />
           </Button>
-          <Button variant="clean">
-            <span>Perfil</span>
-            <HiOutlineCog6Tooth />
+          <Button variant="clean" onClick={() => push('/user/me')}>
+            <span>Meu Perfil</span>
+            <HiOutlineUser />
           </Button>
-          <Button variant="danger" onClick={logout}>
+          <Button variant="clean" onClick={logout}>
             <span>Sair</span>
             <HiOutlineArrowLeftStartOnRectangle />
           </Button>

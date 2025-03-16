@@ -1,6 +1,6 @@
 import Toast from '@/components/ui/toast';
-import { LoginFormSchemaType } from '@/schemas/forms/login';
-import { RegisterFormSchemaType } from '@/schemas/forms/register';
+import { LoginSchemaType } from '@/schemas/user/login';
+import { CreateUserSchemaType } from '@/schemas/user/create';
 import { api } from '@/services/api';
 import { useUserStore } from '@/stores/use-user-store';
 import requestErrorHandler from '@/utils/functions/request-error-handler';
@@ -28,7 +28,7 @@ export function useUser() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** Faz login */
-  const login = async (data: LoginFormSchemaType) => {
+  const login = async (data: LoginSchemaType) => {
     setLoading(true);
     try {
       const response = await api.user.login(data);
@@ -43,7 +43,7 @@ export function useUser() {
   };
 
   /** Cadastra usuário */
-  const register = async (data: RegisterFormSchemaType) => {
+  const register = async (data: CreateUserSchemaType) => {
     setLoading(true);
     try {
       const response = await api.user.create(data);

@@ -2,9 +2,9 @@
 
 import Input from '@/components/ui/input';
 import {
-  registerFormSchema,
-  RegisterFormSchemaType,
-} from '@/schemas/forms/register';
+  createUserSchema,
+  CreateUserSchemaType,
+} from '@/schemas/user/create';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { HiOutlineUser, HiOutlineUserPlus } from 'react-icons/hi2';
@@ -24,8 +24,8 @@ export default function RegisterModal() {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<RegisterFormSchemaType>({
-    resolver: zodResolver(registerFormSchema),
+  } = useForm<CreateUserSchemaType>({
+    resolver: zodResolver(createUserSchema),
   });
 
   const [password, passwordConfirmation] = watch([

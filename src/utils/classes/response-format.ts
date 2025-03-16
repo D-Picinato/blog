@@ -1,16 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export default class ResponseFormat<T = undefined> {
-  success: boolean;
-  status: number;
-  message: string;
-  data?: T;
+  public success: boolean;
 
-  constructor(status: number, message: string, data?: T) {
-    this.success = status < 400;
-    this.status = status;
-    this.message = message;
-    this.data = data;
+  constructor(public status: number, public message: string, public data?: T) {
+    this.success = this.status < 400;
   }
 
   /** Retorna uma resposta estruturada do Next */

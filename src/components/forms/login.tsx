@@ -1,7 +1,7 @@
 'use client';
 
 import Input from '@/components/ui/input';
-import { loginFormSchema, LoginFormSchemaType } from '@/schemas/forms/login';
+import { loginSchema, LoginSchemaType } from '@/schemas/user/login';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import {
@@ -20,8 +20,8 @@ export default function LoginModal() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormSchemaType>({
-    resolver: zodResolver(loginFormSchema),
+  } = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema),
   });
 
   return (

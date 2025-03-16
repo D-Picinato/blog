@@ -11,7 +11,7 @@ export default function requestErrorHandler(
       <Toast variant="warning">Servidor indisponível!</Toast>
     );
 
-  const criticalMessage = 'Erro crítico!';
+  const criticalMessage = 'Erro crítico';
 
   const status: Record<number, JSX.Element> = {
     401: <Toast variant="warning">{response.message || criticalMessage}</Toast>,

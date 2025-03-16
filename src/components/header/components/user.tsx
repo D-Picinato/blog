@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useUser } from '@/hooks/use-user';
 import clsx from 'clsx';
 import { HiOutlineUser } from 'react-icons/hi2';
-import { useCustomModalStore } from '@/stores/use-custom-modal-store';
 import { AiOutlineLoading } from 'react-icons/ai';
 import UserMenu from './user-menu';
 

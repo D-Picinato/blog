@@ -1,25 +1,25 @@
 import ResponseFormat from '@/utils/classes/response-format';
 import catchErrorHandler from '@/utils/functions/catch-error-handler';
 import { cookies } from 'next/headers';
-import verifyJWT from '@/utils/functions/verify-jwt';
+import getUserFromCookies from '@/utils/functions/get-user-from-cookies';
 import { UserType } from '@/@types/user';
+
+export type UserMeResponseType = UserType;
 
 /** Recupera os dados do usuário autenticado */
 export async function GET() {
   try {
-    const tokenCookie = (await cookies()).get('token');
+    // Recupera o usuário autenticado
+    const { user, errorResponse } = await getUserFromCookies(cookies);
+    if (errorResponse) return errorResponse;
 
-    if (!tokenCookie) return new ResponseFormat(401, 'Sessão inválida!').res();
-
-    const { decoded, sessionExpired } = verifyJWT<UserType>(tokenCookie.value);
-
-    if (sessionExpired)
-      return new ResponseFormat(401, 'Sessão expirada!').res();
-
-    if (!decoded) return new ResponseFormat(401, 'Sessão inválida!').res();
-
-    return new ResponseFormat(200, 'Sessão válida!', decoded).res();
+    // Retorna o usuário
+    return new ResponseFormat<UserMeResponseType>(
+      200,
+      'Sessão válida',
+      user
+    ).res();
   } catch (error) {
-    return catchErrorHandler(error).res();
+    return catchErrorHandler(error);
   }
 }
